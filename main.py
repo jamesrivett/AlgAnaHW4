@@ -8,6 +8,7 @@ def carveSeam(start, pixels):
     newPixels = []
 
     for row in lpixels:
+        print(x)
         mid = row[x]
         left = row[x - 1]
         right = row[x + 1]
@@ -41,8 +42,9 @@ def main():
     image = Image.open('img/flowers.jpg')
     pix = np.asarray(image)
 
-    carvedPix = carveSeam(200, pix)
-    print(carvedPix)
+    for i in range(20):
+        carvedPix = carveSeam(200, pix)
+
     image2 = Image.fromarray((carvedPix).astype(np.uint8))
     image2.show()
 
