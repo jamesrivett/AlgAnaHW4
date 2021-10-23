@@ -57,9 +57,9 @@ def main():
     pix = np.asarray(image)
 
     for i in range(20):
-        carvedPix = carveSeam(200 + i, pix)
+        pix = carveSeam(200 + i, pix)
 
-    image2 = Image.fromarray((carvedPix).astype(np.uint8))
+    image2 = Image.fromarray((pix).astype(np.uint8))
     image2.show()
 
 if __name__ == "__main__":
