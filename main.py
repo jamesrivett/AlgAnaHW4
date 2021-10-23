@@ -25,7 +25,7 @@ def carveSeam(start, pixels):
             del newRow[x]
             x = x + 1
         else:
-            num = random.randint(1)
+            num = random.randint(0, 1)
             if num == 0:
                 newRow = deepcopy(row)
                 del newRow[x]
