@@ -1,14 +1,17 @@
 from PIL import Image
 import numpy as np
 from copy import deepcopy
+import time
 
 def carveSeam(start, pixels):
     x = start
     lpixels = pixels.tolist()
+    print(pixels[0][200])
     newPixels = []
 
     for row in lpixels:
-        print(x)
+        print(row[200])
+        time.sleep(5)
         mid = row[x]
         left = row[x - 1]
         right = row[x + 1]
@@ -40,7 +43,9 @@ def findDiff(p1, p2):
 
 def main():
     image = Image.open('img/flowers.jpg')
+    deeznuts = list(image)
     pix = np.asarray(image)
+    print(deeznuts)
 
     for i in range(20):
         carvedPix = carveSeam(200, pix)
