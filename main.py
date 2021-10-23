@@ -6,12 +6,9 @@ import time
 def carveSeam(start, pixels):
     x = start
     lpixels = pixels.tolist()
-    print(pixels[0][200])
     newPixels = []
 
     for row in lpixels:
-        print(row[200])
-        time.sleep(5)
         mid = row[x]
         left = row[x - 1]
         right = row[x + 1]
@@ -27,6 +24,16 @@ def carveSeam(start, pixels):
             newRow = deepcopy(row)
             del newRow[x]
             x = x + 1
+        else:
+            num = random.randint(1)
+            if num == 0:
+                newRow = deepcopy(row)
+                del newRow[x]
+                x = x - 1
+            if num == 1:
+                newRow = deepcopy(row)
+                del newRow[x]
+                x = x + 1
  
         newPixels += [newRow]
 
@@ -43,12 +50,10 @@ def findDiff(p1, p2):
 
 def main():
     image = Image.open('img/flowers.jpg')
-    deeznuts = list(image)
     pix = np.asarray(image)
-    print(deeznuts)
 
-    for i in range(20):
-        carvedPix = carveSeam(200, pix)
+    for i in range(50):
+        carvedPix = carveSeam(20 + i, pix)
 
     image2 = Image.fromarray((carvedPix).astype(np.uint8))
     image2.show()
