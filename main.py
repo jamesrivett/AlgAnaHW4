@@ -1,7 +1,7 @@
 from PIL import Image
 import numpy as np
 from copy import deepcopy
-import time
+import random
 
 def carveSeam(start, pixels):
     x = start
