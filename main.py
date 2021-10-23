@@ -1,12 +1,13 @@
 from PIL import Image
 import numpy as np
+from copy import deepcopy
 
 def carveSeam(start, pixels):
     x = start
-    newPixels = np.empty((1, len(pixels[0]) - 1, 3))
+    lpixels = pixels.tolist()
+    newPixels = []
 
-    for row in pixels:
-        row = np.array(row)
+    for row in lpixels:
         mid = row[x]
         left = row[x - 1]
         right = row[x + 1]
@@ -15,16 +16,18 @@ def carveSeam(start, pixels):
         rDiff = findDiff(mid, right)
 
         if lDiff > rDiff:
-            newRow = np.array([np.delete(row, x, 0)])
+            newRow = deepcopy(row)
+            del newRow[x]
             x = x - 1
         if lDiff < rDiff:
-            newRow = np.array([np.delete(row, x, 0)])
+            newRow = deepcopy(row)
+            del newRow[x]
             x = x + 1
+ 
+        newPixels += [newRow]
 
-        newPixels = np.concatenate((tuple(newPixels), tuple(newRow)))
-    
-    print(newPixels.shape)
-    return newPixels
+    pixArr = np.array(newPixels)
+    return pixArr
 
 def findDiff(p1, p2):
     diff = 0
@@ -39,7 +42,8 @@ def main():
     pix = np.asarray(image)
 
     carvedPix = carveSeam(200, pix)
-    image2 = Image.fromarray((carvedPix * 255).astype(np.uint8))
+    print(carvedPix)
+    image2 = Image.fromarray((carvedPix).astype(np.uint8))
     image2.show()
 
 if __name__ == "__main__":
