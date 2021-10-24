@@ -88,12 +88,16 @@ def findDiff(p1, p2):
 def main():
     image = Image.open('img/flowers.jpg')
     pix = np.asarray(image)
+    spix = np.asarray(image)
 
-    for i in range(int(len(pix[0]) / 11)):
-        pix = carveSeam((i * 10) , pix)
+    for i in range(int(len(pix[0]) / 12)):
+        pix = showSeam((i * 10) , pix)
+        spix = carveSeam((i * 10) , spix)
 
     image2 = Image.fromarray((pix).astype(np.uint8))
+    image3 = Image.fromarray((spix).astype(np.uint8))
     image2.show()
+    image3.show()
 
 if __name__ == "__main__":
     main()
