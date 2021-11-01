@@ -86,10 +86,12 @@ def findDiff(p1, p2):
     return diff
 
 def main():
+    # open image and define two different RGB arrays
     image = Image.open('img/flowers.jpg')
     pix = np.asarray(image)
     spix = np.asarray(image)
 
+    
     for i in range(int(len(pix[0]) / 12)):
         pix = showSeam((i * 10) , pix)
         spix = carveSeam((i * 10) , spix)
